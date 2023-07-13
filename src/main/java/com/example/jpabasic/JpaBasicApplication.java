@@ -21,17 +21,17 @@ public class JpaBasicApplication {
 
 		try {
 
-			// MemberEntity가 비영속 상태
-			MemberEntity member = new MemberEntity();
-			member.setId(100L);
-			member.setName("HELLO JPA");
-
-			// MemberEntity가 영속 상태 (Entity 수정시에 persist 호출을 하지 않는것이 맞음)
-			em.persist(member);
-			// em.detach() : 영속 상태에서 영구 제거
-
-			// 1차 캐시에서 조회
-			MemberEntity findMember = em.find(MemberEntity.class, 100L);
+//			// MemberEntity가 비영속 상태
+//			MemberEntity member = new MemberEntity();
+//			member.setId(100L);
+//			member.setUsername("HELLO JPA");
+//
+//			// MemberEntity가 영속 상태 (Entity 수정시에 persist 호출을 하지 않는것이 맞음)
+//			em.persist(member);
+//			// em.detach() : 영속 상태에서 영구 제거
+//
+//			// 1차 캐시에서 조회
+//			MemberEntity findMember = em.find(MemberEntity.class, 100L);
 
 			// DB 쿼리가 날라가는 시점
 			tx.commit();
