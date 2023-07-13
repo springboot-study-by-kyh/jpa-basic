@@ -5,9 +5,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -16,10 +20,21 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@TableGenerator(
+    name = "MEMBER_SEQ_GENERATOR",
+    table = "MEMBER_SEQUENCES",
+    pkColumnValue = "MEMBER_SEQ",
+    initialValue = 1,
+    allocationSize = 50 // 미리 DB 호출시 50개 들고오기
+)
 @Entity
 @Table(name = "Member")
 public class MemberEntity {
 
+    @GeneratedValue(
+        strategy = GenerationType.AUTO,
+        generator = "MEMBER_SEQ_GENERATOR"
+    )
     @Id // PK 매핑
     private Long id;
 
