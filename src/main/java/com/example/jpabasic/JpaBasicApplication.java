@@ -1,5 +1,6 @@
 package com.example.jpabasic;
 
+import com.example.jpabasic.domain.Member;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -20,9 +21,12 @@ public class JpaBasicApplication {
 		tx.begin();
 
 		try {
+			Member member = new Member();
 
-			MemberEntity member = new MemberEntity();
-			member.setUsername("D");
+			member.setName("sjh");
+			member.setCity("busan");
+			member.setZipcode("1110-111");
+			member.setStreet("buk-gu");
 
 			em.persist(member);
 
