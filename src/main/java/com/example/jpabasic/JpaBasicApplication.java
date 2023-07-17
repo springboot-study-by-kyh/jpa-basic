@@ -21,14 +21,7 @@ public class JpaBasicApplication {
 		tx.begin();
 
 		try {
-			Member member = new Member();
 
-			member.setName("sjh");
-			member.setCity("busan");
-			member.setZipcode("1110-111");
-			member.setStreet("buk-gu");
-
-			em.persist(member);
 
 			// DB 쿼리가 날라가는 시점
 			tx.commit();
