@@ -7,6 +7,8 @@
         <class>com.example.jpabasic.domain.Order</class>
         <class>com.example.jpabasic.domain.OrderItem</class>
         <class>com.example.jpabasic.domain.Item</class>
+        <class>com.example.jpabasic.domain.Delivery</class>
+        <class>com.example.jpabasic.domain.Category</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
