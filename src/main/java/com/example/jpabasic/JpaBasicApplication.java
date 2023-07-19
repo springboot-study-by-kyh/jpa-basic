@@ -1,5 +1,6 @@
 package com.example.jpabasic;
 
+import com.example.jpabasic.domain.Book;
 import com.example.jpabasic.domain.Member;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -22,6 +23,11 @@ public class JpaBasicApplication {
 
 		try {
 
+			Book book = new Book();
+			book.setName("JPA");
+			book.setAuthor("Kim");
+
+			em.persist(book);
 
 			// DB 쿼리가 날라가는 시점
 			tx.commit();

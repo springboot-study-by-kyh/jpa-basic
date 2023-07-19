@@ -9,6 +9,9 @@
         <class>com.example.jpabasic.domain.Item</class>
         <class>com.example.jpabasic.domain.Delivery</class>
         <class>com.example.jpabasic.domain.Category</class>
+        <class>com.example.jpabasic.domain.Movie</class>
+        <class>com.example.jpabasic.domain.Book</class>
+        <class>com.example.jpabasic.domain.Album</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
