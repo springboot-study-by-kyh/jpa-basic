@@ -1,7 +1,7 @@
 package com.example.jpabasic;
 
 import com.example.jpabasic.domain.Book;
-import com.example.jpabasic.domain.Member;
+import com.example.jpabasic.jpql.Member;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -24,12 +24,14 @@ public class JpaBasicApplication {
 
 		try {
 
-			List<Member> members = em.createQuery(
-				"SELECT m FROM Member m WHERE m.username like '%kim%'",
-				Member.class
-				)
-				.getResultList();
+			Member member = new Member();
+			member.setUsername("member1");
+			member.setAge(10);
+			em.persist(member);
 
+			Member res = em.createQuery("select m from Member m.username = : username", Member.class)
+				.setParameter("username", "member1")
+					.getSingleResult();
 
 			// DB 쿼리가 날라가는 시점
 			tx.commit();
