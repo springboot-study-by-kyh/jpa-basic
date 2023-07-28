@@ -17,17 +17,15 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-public class Member{
+public class Member extends BaseEntity{
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "MEMBER_ID")
     private Long id;
     private String name;
 
-    @Embedded
-    private Period workPeriod;
 
-    @Embedded
+    @Embedded // 명확하게 값 타입을 명시해줌.
     private Address homeAddress;
 
     @OneToMany(mappedBy = "member")
