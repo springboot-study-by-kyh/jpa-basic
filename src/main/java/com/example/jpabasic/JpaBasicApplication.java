@@ -2,6 +2,7 @@ package com.example.jpabasic;
 
 import com.example.jpabasic.domain.Book;
 import com.example.jpabasic.domain.Member;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -23,11 +24,12 @@ public class JpaBasicApplication {
 
 		try {
 
-			Book book = new Book();
-			book.setName("JPA");
-			book.setAuthor("Kim");
+			List<Member> members = em.createQuery(
+				"SELECT m FROM Member m WHERE m.username like '%kim%'",
+				Member.class
+				)
+				.getResultList();
 
-			em.persist(book);
 
 			// DB 쿼리가 날라가는 시점
 			tx.commit();
