@@ -3,6 +3,7 @@ package com.example.jpabasic;
 import com.example.jpabasic.domain.Book;
 import com.example.jpabasic.jpql.Member;
 import com.example.jpabasic.jpql.MemberDTO;
+import com.example.jpabasic.jpql.Team;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -25,18 +26,22 @@ public class JpaBasicApplication {
 
 		try {
 
+			Team team = new Team();
+			team.setName("teamA");
+			em.persist(team);
+
 			Member member = new Member();
 			member.setUsername("member1");
 			member.setAge(10);
+			member.setTeam(team);
 			em.persist(member);
 
 			em.flush();
 			em.clear();
 
-			em.createQuery("select m from Member m order by m.age desc", Member.class)
-				.setFirstResult(0)
-					.setMaxResults(10)
-						.getResultList();
+			String query = "select m from Member m inner join m.team t order by m.age desc";
+			em.createQuery(query, Member.class)
+				.getResultList();
 
 			// DB 쿼리가 날라가는 시점
 			tx.commit();
