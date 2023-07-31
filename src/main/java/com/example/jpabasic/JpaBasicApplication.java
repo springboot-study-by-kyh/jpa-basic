@@ -39,9 +39,14 @@ public class JpaBasicApplication {
 			em.flush();
 			em.clear();
 
-			String query = "select m from Member m inner join m.team t order by m.age desc";
-			em.createQuery(query, Member.class)
-				.getResultList();
+			String query = "select "
+							+ "case when m.age <= 10 then 'student'"
+							+ "		when m.age >= 60 then 'senior'"
+							+ "		else 'basic'"
+							+ "end"
+							+ "from Member m";
+
+			em.createQuery(query, String.class).getResultList();
 
 			// DB 쿼리가 날라가는 시점
 			tx.commit();
