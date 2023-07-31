@@ -2,6 +2,7 @@ package com.example.jpabasic;
 
 import com.example.jpabasic.domain.Book;
 import com.example.jpabasic.jpql.Member;
+import com.example.jpabasic.jpql.MemberDTO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -29,9 +30,10 @@ public class JpaBasicApplication {
 			member.setAge(10);
 			em.persist(member);
 
-			Member res = em.createQuery("select m from Member m.username = : username", Member.class)
-				.setParameter("username", "member1")
-					.getSingleResult();
+			em.flush();
+			em.clear();
+
+			em.createQuery("select new jpql(m.username, m.age) from Member m", MemberDTO.class).getResultList();
 
 			// DB 쿼리가 날라가는 시점
 			tx.commit();
