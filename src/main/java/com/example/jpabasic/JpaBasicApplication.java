@@ -33,7 +33,10 @@ public class JpaBasicApplication {
 			em.flush();
 			em.clear();
 
-			em.createQuery("select new jpql(m.username, m.age) from Member m", MemberDTO.class).getResultList();
+			em.createQuery("select m from Member m order by m.age desc", Member.class)
+				.setFirstResult(0)
+					.setMaxResults(10)
+						.getResultList();
 
 			// DB 쿼리가 날라가는 시점
 			tx.commit();
