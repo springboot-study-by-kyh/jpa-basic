@@ -26,27 +26,37 @@ public class JpaBasicApplication {
 
 		try {
 
-			Team team = new Team();
-			team.setName("teamA");
-			em.persist(team);
+			Team teamA = new Team();
+			teamA.setName("teamA");
+			em.persist(teamA);
 
-			Member member = new Member();
-			member.setUsername("member1");
-			member.setAge(10);
-			member.setTeam(team);
-			em.persist(member);
+			Team teamB = new Team();
+			teamB.setName("teamB");
+			em.persist(teamB);
+
+			Member member1 = new Member();
+			member1.setUsername("member1");
+			member1.setTeam(teamA);
+			em.persist(member1);
+
+			Member member2 = new Member();
+			member2.setUsername("member2");
+			member2.setTeam(teamA);
+			em.persist(member2);
+
+			Member member3 = new Member();
+			member3.setUsername("member3");
+			member3.setTeam(teamB);
+			em.persist(member3);
 
 			em.flush();
 			em.clear();
 
-			String query = "select "
-							+ "case when m.age <= 10 then 'student'"
-							+ "		when m.age >= 60 then 'senior'"
-							+ "		else 'basic'"
-							+ "end"
-							+ "from Member m";
+			String query = "select m from Member m where m.id = :member";
 
-			em.createQuery(query, String.class).getResultList();
+			em.createQuery(query, Member.class)
+				.setParameter("member", member1)
+				.getResultList();
 
 			// DB 쿼리가 날라가는 시점
 			tx.commit();
