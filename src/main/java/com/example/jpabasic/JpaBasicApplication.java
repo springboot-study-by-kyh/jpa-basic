@@ -52,10 +52,8 @@ public class JpaBasicApplication {
 			em.flush();
 			em.clear();
 
-			String query = "select m from Member m where m.id = :member";
-
-			em.createQuery(query, Member.class)
-				.setParameter("member", member1)
+			em.createNamedQuery("Member.findByUsername", Member.class)
+				.setParameter("username", "회원1")
 				.getResultList();
 
 			// DB 쿼리가 날라가는 시점
