@@ -52,9 +52,10 @@ public class JpaBasicApplication {
 			em.flush();
 			em.clear();
 
-			em.createNamedQuery("Member.findByUsername", Member.class)
-				.setParameter("username", "회원1")
-				.getResultList();
+			em.createQuery("update Member m set m.age = 20")
+				.executeUpdate();
+
+			em.clear();
 
 			// DB 쿼리가 날라가는 시점
 			tx.commit();
